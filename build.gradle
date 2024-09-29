@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.zxing:core:3.5.1'
+    implementation 'com.google.zxing:javase:3.5.1'
+
+}
+application {
+    // 替换为您的主类的完整包名和类名
+    mainClass = 'com.example.QRCodeCornerExtractorOpenCV'
+}
+
+tasks.withType(JavaExec) {
+    // 设置本地库路径
+    systemProperty 'java.library.path', "$projectDir/libs/native"
+}
+//test {
+//    useJUnitPlatform()
+//}
